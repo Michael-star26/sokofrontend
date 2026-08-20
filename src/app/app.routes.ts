@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth-guard';
 import { adminGuard } from './core/guards/admin-guard';
-
+import { RenderMode, ServerRoute } from '@angular/ssr';
 export const routes: Routes = [
   { path: '', redirectTo: 'products', pathMatch: 'full' },
   {
@@ -31,6 +31,7 @@ export const routes: Routes = [
       },
       {
         path: ':id',
+        
         loadComponent: () => import('./features/products/product-detail/product-detail').then(m => m.ProductDetail)
       }
     ]
