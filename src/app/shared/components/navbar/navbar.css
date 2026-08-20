@@ -215,3 +215,6 @@
     display: block !important;
   }
 }
+main, .main-content {
+  padding-top: 16px; /* Provides breathing space below sticky header */
+}

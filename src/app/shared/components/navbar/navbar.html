@@ -1,55 +1,40 @@
 <header class="navbar-header">
   <div class="navbar-container">
-    <!-- Brand / Logo -->
+    <!-- Logo -->
     <a routerLink="/products" class="brand-logo">
-      <span nz-icon nzType="shopping-cart" nzTheme="outline"></span>
+      <span nz-icon nzType="shopping-cart" class="brand-icon"></span>
       <span class="brand-name">SokoCommerce</span>
     </a>
 
-    <!-- Navigation Links -->
-    <ul nz-menu nzMode="horizontal" class="nav-menu">
-      <li nz-menu-item nzMatchRouter>
-        <a routerLink="/products">
-          <span nz-icon nzType="appstore"></span>
-          Products
-        </a>
-      </li>
+    <!-- Desktop Navigation -->
+    <div class="desktop-menu">
+      <a routerLink="/products" routerLinkActive="active-link" class="nav-link">
+        <span nz-icon nzType="appstore"></span>
+        <span>Products</span>
+      </a>
 
-      <!-- Admin-Only Links -->
       @if (auth.isAdmin()) {
-        <li nz-submenu nzTitle="Admin Panel" nzIcon="setting">
-          <ul>
-            <li nz-menu-item nzMatchRouter>
-              <a routerLink="/products/add">
-                <span nz-icon nzType="plus-circle"></span> Add Product
-              </a>
-            </li>
-            <li nz-menu-item nzMatchRouter>
-              <a routerLink="/admin/users">
-                <span nz-icon nzType="team"></span> Manage Users
-              </a>
-            </li>
-          </ul>
-        </li>
+        <a routerLink="/products/add" routerLinkActive="active-link" class="nav-link">
+          <span nz-icon nzType="plus-circle"></span>
+          <span>Add Product</span>
+        </a>
+        <a routerLink="/admin/users" routerLinkActive="active-link" class="nav-link">
+          <span nz-icon nzType="team"></span>
+          <span>Manage Users</span>
+        </a>
       }
-    </ul>
+    </div>
 
-    <!-- Auth Actions -->
-    <div class="nav-actions">
+    <!-- Actions -->
+    <div class="desktop-actions nav-actions">
       @if (auth.isAuthenticated()) {
         <div class="user-status">
-          @if (auth.isAdmin()) {
-            <nz-tag nzColor="blue">Admin</nz-tag>
-          } @else {
-            <nz-tag nzColor="default">User</nz-tag>
-          }
+          <span class="role-badge" [class.admin]="auth.isAdmin()" [class.user]="!auth.isAdmin()">
+            {{ auth.isAdmin() ? 'Admin' : 'User' }}
+          </span>
         </div>
 
-        <button
-          nz-button
-          nzType="default"
-          nzDanger
-          (click)="logout()">
+        <button nz-button nzType="default" nzDanger (click)="logout()">
           <span nz-icon nzType="logout"></span>
           Logout
         </button>
@@ -58,5 +43,29 @@
         <a routerLink="/auth/register" nz-button nzType="primary">Register</a>
       }
     </div>
+
+    <!-- Mobile Button -->
+    <button type="button" class="mobile-toggle-btn" (click)="isMobileMenuOpen = true">
+      <span nz-icon nzType="menu"></span>
+    </button>
   </div>
 </header>
+
+@if (isMobileMenuOpen) {
+  <nz-drawer
+    [nzVisible]="isMobileMenuOpen"
+    nzPlacement="right"
+    nzTitle="Menu"
+    (nzOnClose)="isMobileMenuOpen = false">
+    <ng-container *nzDrawerContent>
+      <div class="mobile-drawer-content">
+        <div class="mobile-nav-links">
+          <a routerLink="/products" class="mobile-link" (click)="isMobileMenuOpen = false">
+            <span nz-icon nzType="appstore"></span>
+            <span>Products</span>
+          </a>
+        </div>
+      </div>
+    </ng-container>
+  </nz-drawer>
+}

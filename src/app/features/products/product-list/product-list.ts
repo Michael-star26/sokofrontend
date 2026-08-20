@@ -1,6 +1,6 @@
-import { Component, OnInit, inject, signal, computed } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ProductService } from '../../../core/services/product';
@@ -11,7 +11,6 @@ import { Auth } from '../../../core/services/auth';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
@@ -27,7 +26,6 @@ import { NzTooltipModule } from 'ng-zorro-antd/tooltip';
     NzButtonModule,
     NzGridModule,
     NzSpinModule,
-    NzIconModule,
     NzInputModule,
     NzTagModule,
     NzBadgeModule,
@@ -39,6 +37,7 @@ import { NzTooltipModule } from 'ng-zorro-antd/tooltip';
 export class ProductList implements OnInit {
   private productService = inject(ProductService);
   private authService = inject(Auth);
+  private router = inject(Router);
 
   products$!: Observable<Product[]>;
   isAdmin$ = this.authService.isAdmin$;
@@ -48,11 +47,11 @@ export class ProductList implements OnInit {
   selectedCategory = signal<string>('ALL');
 
   categories = [
-    { label: 'All Items', value: 'ALL', icon: 'appstore' },
-    { label: 'Vegetables', value: 'VEGETABLES', icon: 'environment' },
-    { label: 'Fruits', value: 'FRUITS', icon: 'heart' },
-    { label: 'Dairy & Eggs', value: 'DAIRY', icon: 'coffee' },
-    { label: 'Bakery', value: 'BAKERY', icon: 'shop' }
+    { label: 'All Items', value: 'ALL' },
+    { label: 'Vegetables', value: 'VEGETABLES' },
+    { label: 'Fruits', value: 'FRUITS' },
+    { label: 'Dairy & Eggs', value: 'DAIRY' },
+    { label: 'Bakery', value: 'BAKERY' }
   ];
 
   ngOnInit(): void {
@@ -63,7 +62,13 @@ export class ProductList implements OnInit {
     this.selectedCategory.set(cat);
   }
 
-  // Filter helper for templates
+  // Updated method signature to allow optional/undefined values safely
+  viewProductDetail(id: string | number | undefined): void {
+    if (id !== undefined) {
+      this.router.navigate(['/products', id]);
+    }
+  }
+
   filterProducts(products: Product[]): Product[] {
     const q = this.searchQuery().toLowerCase().trim();
     const cat = this.selectedCategory();

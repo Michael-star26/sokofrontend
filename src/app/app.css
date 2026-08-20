@@ -25,3 +25,28 @@
   padding: 20px;
   font-size: 0.9rem;
 }
+
+
+.app-layout {
+  min-height: 100vh;
+}
+
+/* Remove default background/padding from nz-header so app-navbar styles control the look */
+.app-header {
+  background: transparent !important;
+  padding: 0 !important;
+  height: auto !important;
+  line-height: normal !important;
+  z-index: 1000;
+}
+
+.app-content {
+  position: relative;
+  z-index: 1;
+}
+
+.content-container {
+  padding: 24px 16px;
+  max-width: 1240px;
+  margin: 0 auto;
+}

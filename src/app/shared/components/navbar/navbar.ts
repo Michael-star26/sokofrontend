@@ -9,6 +9,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzDropdownModule } from 'ng-zorro-antd/dropdown';
 import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 
 @Component({
   selector: 'app-navbar',
@@ -21,7 +22,8 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
     NzButtonModule,
     NzIconModule,
     NzDropdownModule,
-    NzTagModule
+    NzTagModule,
+    NzDrawerModule
   ],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css'
@@ -29,6 +31,8 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
 export class Navbar {
   public auth = inject(Auth);
   private router = inject(Router);
+
+  isMobileMenuOpen = false;
 
   logout(): void {
     this.auth.logout();
