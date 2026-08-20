@@ -1,0 +1,80 @@
+<nz-layout class="duo-admin-layout">
+
+  <!-- Sidebar Navigation -->
+  <nz-sider nzWidth="220px" nzTheme="light" class="duo-admin-sider">
+    <div class="duo-sidebar-logo">
+      <span nz-icon nzType="dashboard" nzTheme="outline" class="logo-icon"></span>
+      <span class="logo-text">Admin Portal</span>
+    </div>
+
+    <!-- State Switcher (No routerLink / page reloads) -->
+    <ul nz-menu nzMode="inline" class="duo-admin-menu">
+      <li
+        nz-menu-item
+        [nzSelected]="activeTab() === 'users'"
+        (click)="selectTab('users')">
+        <span nz-icon nzType="team"></span>
+        <span>User Roles</span>
+      </li>
+      <li
+        nz-menu-item
+        [nzSelected]="activeTab() === 'add-product'"
+        (click)="selectTab('add-product')">
+        <span nz-icon nzType="plus-circle"></span>
+        <span>Add Product</span>
+      </li>
+      <li
+        nz-menu-item
+        [nzSelected]="activeTab() === 'catalog'"
+        (click)="selectTab('catalog')">
+        <span nz-icon nzType="appstore"></span>
+        <span>View Catalog</span>
+      </li>
+    </ul>
+
+    <div class="duo-sider-footer">
+      <button type="button" class="uo-button-danger duo-logout-btn" (click)="onLogout()">
+        <span nz-icon nzType="logout"></span>
+        Log Out
+      </button>
+    </div>
+  </nz-sider>
+
+  <!-- Main Workspace -->
+  <nz-layout class="duo-main-section">
+    <nz-header class="duo-admin-header">
+      <div class="duo-header-content">
+        <h2>
+          @switch (activeTab()) {
+            @case ('users') { User Role Management }
+            @case ('add-product') { Create Harvest Item }
+            @case ('catalog') { Product Catalog }
+          }
+        </h2>
+        <div class="user-badge">
+          @if (isAdmin) {
+            <span class="duo-role-tag">Administrator</span>
+          }
+        </div>
+      </div>
+    </nz-header>
+
+    <nz-content class="duo-admin-content">
+      <div class="duo-inner-content">
+        <!-- Render feature inline without routes -->
+        @switch (activeTab()) {
+          @case ('users') {
+            <app-users></app-users>
+          }
+          @case ('add-product') {
+            <app-product-add></app-product-add>
+          }
+          @case ('catalog') {
+            <app-product-list></app-product-list>
+          }
+        }
+      </div>
+    </nz-content>
+  </nz-layout>
+
+</nz-layout>

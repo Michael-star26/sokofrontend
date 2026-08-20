@@ -1,0 +1,62 @@
+<header class="navbar-header">
+  <div class="navbar-container">
+    <!-- Brand / Logo -->
+    <a routerLink="/products" class="brand-logo">
+      <span nz-icon nzType="shopping-cart" nzTheme="outline"></span>
+      <span class="brand-name">SokoCommerce</span>
+    </a>
+
+    <!-- Navigation Links -->
+    <ul nz-menu nzMode="horizontal" class="nav-menu">
+      <li nz-menu-item nzMatchRouter>
+        <a routerLink="/products">
+          <span nz-icon nzType="appstore"></span>
+          Products
+        </a>
+      </li>
+
+      <!-- Admin-Only Links -->
+      @if (auth.isAdmin()) {
+        <li nz-submenu nzTitle="Admin Panel" nzIcon="setting">
+          <ul>
+            <li nz-menu-item nzMatchRouter>
+              <a routerLink="/products/add">
+                <span nz-icon nzType="plus-circle"></span> Add Product
+              </a>
+            </li>
+            <li nz-menu-item nzMatchRouter>
+              <a routerLink="/admin/users">
+                <span nz-icon nzType="team"></span> Manage Users
+              </a>
+            </li>
+          </ul>
+        </li>
+      }
+    </ul>
+
+    <!-- Auth Actions -->
+    <div class="nav-actions">
+      @if (auth.isAuthenticated()) {
+        <div class="user-status">
+          @if (auth.isAdmin()) {
+            <nz-tag nzColor="blue">Admin</nz-tag>
+          } @else {
+            <nz-tag nzColor="default">User</nz-tag>
+          }
+        </div>
+
+        <button
+          nz-button
+          nzType="default"
+          nzDanger
+          (click)="logout()">
+          <span nz-icon nzType="logout"></span>
+          Logout
+        </button>
+      } @else {
+        <a routerLink="/auth/login" nz-button nzType="link">Login</a>
+        <a routerLink="/auth/register" nz-button nzType="primary">Register</a>
+      }
+    </div>
+  </div>
+</header>

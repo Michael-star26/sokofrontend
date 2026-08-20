@@ -1,0 +1,131 @@
+<div class="grocery-experience">
+
+  <!-- Interactive Hero Banner -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span> 100% Organically Farmed
+      </div>
+      <h1 class="hero-title">Soko Harvest Market 🥦</h1>
+      <p class="hero-subtitle">
+        Explore farm-fresh produce picked daily. Tap any item to inspect nutritional details or place a direct order!
+      </p>
+    </div>
+
+    <!-- Admin Quick Action -->
+    @if (isAdmin$ | async) {
+      <div class="admin-quick-dock">
+        <button nz-button routerLink="/products/add" class="btn-duo-admin">
+          <span nz-icon nzType="plus-circle" nzTheme="fill"></span>
+          <span>Add Harvest Item</span>
+        </button>
+      </div>
+    }
+  </section>
+
+  <!-- Interactive Controls Bar -->
+  <div class="control-deck">
+    <!-- Search Bar -->
+    <div class="search-box">
+      <span nz-icon nzType="search" class="search-icon"></span>
+      <input
+        type="text"
+        placeholder="Search crisp apples, leafy greens, milk..."
+        [ngModel]="searchQuery()"
+        (ngModelChange)="searchQuery.set($event)"
+      />
+      @if (searchQuery()) {
+        <button class="clear-btn" (click)="searchQuery.set('')">✕</button>
+      }
+    </div>
+
+    <!-- Category Pill Selector -->
+    <div class="category-pills">
+      @for (cat of categories; track cat.value) {
+        <button
+          class="pill-btn"
+          [class.active]="selectedCategory() === cat.value"
+          (click)="setCategory(cat.value)">
+          <span nz-icon [nzType]="cat.icon"></span>
+          <span>{{ cat.label }}</span>
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- Product Grid & Async Handler -->
+  @if (products$ | async; as rawProducts) {
+    @let products = filterProducts(rawProducts);
+
+    @if (products.length > 0) {
+      <div nz-row [nzGutter]="[24, 24]" class="product-grid">
+        @for (item of products; track item.id) {
+          <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8" [nzLg]="6">
+
+            <div class="duo-grocery-card">
+              <!-- Visual Card Header -->
+              <div class="card-media">
+                <img
+                  [src]="item.image_url || 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=400'"
+                  [alt]="item.name"
+                  loading="lazy"
+                />
+
+                <!-- Category Tag -->
+                <span class="pill-tag">{{ item.category || 'Farm Fresh' }}</span>
+
+                <!-- Freshness Indicator -->
+                <div class="fresh-meter" nz-tooltip nzTooltipTitle="Harvested within 24 hours">
+                  <span class="leaf-icon">🍃</span> 98% Fresh
+                </div>
+              </div>
+
+              <!-- Card Body -->
+              <div class="card-body">
+                <div class="title-row">
+                  <h3 class="product-title">{{ item.name }}</h3>
+                </div>
+
+                <p class="product-snippet">
+                  {{ item.description || 'Sourced directly from local highland farms.' }}
+                </p>
+
+                <!-- Interactive Card Footer -->
+                <div class="card-footer">
+                  <div class="price-chip">
+                    <span class="currency">KSh</span>
+                    <span class="amount">{{ item.cost ? item.cost.toFixed(0) : '0' }}</span>
+                    <span class="unit">/kg</span>
+                  </div>
+
+                  <a [routerLink]="['/products', item.id]" class="btn-duo-action">
+                    <span>Inspect</span>
+                    <span nz-icon nzType="arrow-right"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        }
+      </div>
+    } @else {
+      <!-- Interactive Empty Search Result -->
+      <div class="empty-state-box">
+        <div class="empty-illustration">🥦❓</div>
+        <h3>No harvest matching your search</h3>
+        <p>Try searching for another item or clear your search filter.</p>
+        <button class="btn-duo-reset" (click)="searchQuery.set(''); selectedCategory.set('ALL')">
+          Reset Search Filters
+        </button>
+      </div>
+    }
+  } @else {
+    <!-- Skeleton Loading Grid -->
+    <div class="spinner-overlay">
+      <nz-spin nzSimple nzSize="large"></nz-spin>
+      <p class="loading-text">Fetching today's fresh harvest...</p>
+    </div>
+  }
+
+</div>

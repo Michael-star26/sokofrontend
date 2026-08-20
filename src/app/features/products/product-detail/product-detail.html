@@ -1,0 +1,81 @@
+<div class="duo-page-container">
+
+  <!-- Navigation Header -->
+  <div class="duo-nav-bar">
+    <a routerLink="/products" class="uo-button-secondary duo-back-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+      </svg>
+      Market
+    </a>
+
+    <!-- Stamina Badge -->
+    <div class="uo-badge-gold">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="#ffc800">
+        <path d="M7 2v11h3v9l7-12h-4l4-8z"/>
+      </svg>
+      <span>99/100</span>
+    </div>
+  </div>
+
+  @if (product(); as prod) {
+    <!-- Side-by-Side Flex Layout -->
+    <div class="duo-product-layout">
+
+      <!-- TOP LEFT: Square Image Card -->
+      <div class="duo-image-card">
+        <span class="duo-category-badge">{{ prod.category }}</span>
+        <img
+          [src]="prod.image_url || 'https://via.placeholder.com/150'"
+          [alt]="prod.name"
+          class="duo-product-image"
+        />
+      </div>
+
+      <!-- RIGHT SIDE: Info & Action Card -->
+      <div class="duo-details-card">
+        <div class="duo-header-info">
+          <h1 class="duo-title">{{ prod.name }}</h1>
+
+          <div class="duo-price-row">
+            <span class="duo-gem-price">KSh {{ prod.cost }}</span>
+            <span class="duo-stock-status">In Stock</span>
+          </div>
+        </div>
+
+        <p class="duo-description">
+          {{ prod.description || 'Fresh item ready for collection.' }}
+        </p>
+
+        <div class="duo-actions">
+          <button type="button" class="uo-button-primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+            </svg>
+            Collect Item
+          </button>
+
+          @if (isAdmin()) {
+            <button
+              type="button"
+              nz-popconfirm
+              nzPopconfirmTitle="Remove product?"
+              (nzOnConfirm)="deleteProduct(prod.id!)"
+              class="uo-button-danger">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+              </svg>
+              Delete Item
+            </button>
+          }
+        </div>
+      </div>
+
+    </div>
+  } @else {
+    <div class="duo-loading">
+      <nz-spin nzSimple></nz-spin>
+      <p style="margin-top: 8px;">Loading Item...</p>
+    </div>
+  }
+</div>

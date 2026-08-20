@@ -1,1 +1,165 @@
-/* You can add global styles to this file, and also import other style files */
+/* ==========================================================================
+   Duolingo "Light Harvest" Design System Tokens & Global Styles
+   ========================================================================== */
+
+   :root {
+    /* Light Palette Surfaces */
+    --soko-bg-main: #eef2f0;          /* Soft light grey-green background */
+    --soko-card-bg: #ffffff;          /* Pure white container cards */
+    --soko-card-inner: #f9fafb;       /* Recessed element background */
+
+    /* Extrusion Borders & Shadows */
+    --soko-border-subtle: #e5e7eb;     /* Soft card borders */
+    --soko-border-extrusion: #d1d5db;  /* Bottom 3D shadow borders */
+    --soko-border-dark: #1b4332;       /* Active/Dark container borders */
+
+    /* Duolingo Brand Accents */
+    --soko-green-primary: #1b4332;    /* Primary dark forest green */
+    --soko-green-shadow: #102a1f;     /* 3D base shadow for dark green */
+
+    --soko-lime-action: #58cc02;     /* Bright action green */
+    --soko-lime-shadow: #46a302;     /* Bright action 3D base */
+
+    --soko-amber: #ffc800;           /* Highlights / Badges */
+    --soko-amber-shadow: #e5b200;    /* 3D base for gold */
+
+    --soko-crimson: #ff4b4b;         /* Destructive / Delete */
+    --soko-crimson-shadow: #ea2b2b;  /* Destructive 3D base */
+
+    /* Typography Colors */
+    --soko-text-main: #111827;       /* Primary heading/body text */
+    --soko-text-muted: #6b7280;      /* Secondary descriptions */
+  }
+
+  /* ==========================================================================
+     Global Reset
+     ========================================================================== */
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--soko-bg-main) !important;
+    color: var(--soko-text-main);
+    font-family: 'din-round', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+  }
+
+  *, *::before, *::after {
+    box-sizing: inherit;
+  }
+
+  /* ==========================================================================
+     3D Button & Card Primitives
+     ========================================================================== */
+
+  /* Standard Dark Green Button (Matches INSPECT buttons) */
+  .uo-button-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background-color: var(--soko-green-primary);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 12px;
+    border: 2px solid var(--soko-green-primary);
+    border-bottom: 4px solid var(--soko-green-shadow);
+    transition: transform 0.1s ease, border-bottom-width 0.1s ease;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .uo-button-primary:active {
+    transform: translateY(2px);
+    border-bottom-width: 2px;
+  }
+
+  /* Bright Action Button (Matches ADD HARVEST ITEM button) */
+  .uo-button-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background-color: #ff9f1c;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+    border-radius: 14px;
+    border: 2px solid #e08300;
+    border-bottom: 4px solid #c27100;
+    cursor: pointer;
+  }
+
+  /* Secondary Button (Back / Filter style) */
+  .uo-button-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background-color: #ffffff;
+    color: var(--soko-green-primary);
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+    border-radius: 12px;
+    border: 2px solid var(--soko-border-subtle);
+    border-bottom: 4px solid var(--soko-border-extrusion);
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .uo-button-secondary:active {
+    transform: translateY(2px);
+    border-bottom-width: 2px;
+  }
+
+  /* Destructive Button */
+  .uo-button-danger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+    background-color: var(--soko-crimson);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    border-radius: 12px;
+    border: 2px solid var(--soko-crimson-shadow);
+    border-bottom: 4px solid #b82e2e;
+    cursor: pointer;
+  }
+
+  /* Base Extruded White Card */
+  .uo-card {
+    background-color: var(--soko-card-bg);
+    border-radius: 20px;
+    border: 2px solid var(--soko-border-subtle);
+    border-bottom: 6px solid var(--soko-border-extrusion);
+  }
+
+  /* Gold Energy Badge */
+  .uo-badge-gold {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #ffffff;
+    border: 2px solid var(--soko-border-subtle);
+    border-bottom: 4px solid var(--soko-border-extrusion);
+    border-radius: 12px;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 900;
+    color: #d97706;
+  }

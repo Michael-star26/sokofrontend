@@ -1,0 +1,26 @@
+.users-container {
+  padding: 8px 0;
+}
+
+.header-bar {
+  margin-bottom: 20px;
+}
+
+.header-bar h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  color: #1f2937;
+}
+
+.header-bar p {
+  margin: 4px 0 0 0;
+  color: #6b7280;
+}
+
+.users-table {
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #f0f0f0;
+}

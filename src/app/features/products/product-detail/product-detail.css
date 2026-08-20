@@ -1,0 +1,151 @@
+.duo-page-container {
+  max-width: 820px;
+  margin: 24px auto;
+  padding: 0 16px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Header Elements */
+.duo-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.duo-back-btn {
+  text-decoration: none !important;
+}
+
+/* Main Layout Grid */
+.duo-product-layout {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* Square Image Container (Left) */
+.duo-image-card {
+  width: 220px;
+  height: 220px;
+  flex-shrink: 0;
+  background-color: #ffffff;
+  border: 2px solid #e5e7eb;
+  border-bottom: 6px solid #d1d5db;
+  border-radius: 20px;
+  padding: 12px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.duo-category-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #1b4332;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 6px;
+  z-index: 5;
+}
+
+.duo-product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* Content Details Card (Right) */
+.duo-details-card {
+  flex-grow: 1;
+  background-color: #ffffff;
+  border: 2px solid #e5e7eb;
+  border-bottom: 6px solid #d1d5db;
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+.duo-title {
+  font-size: 22px;
+  font-weight: 900;
+  margin: 0;
+  color: #111827;
+}
+
+.duo-price-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.duo-gem-price {
+  font-size: 18px;
+  font-weight: 900;
+  color: #1b4332;
+}
+
+.duo-stock-status {
+  font-size: 11px;
+  font-weight: 900;
+  color: #059669;
+  background-color: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  padding: 2px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.duo-description {
+  margin: 0;
+  font-size: 13px;
+  color: #4b5563;
+  line-height: 1.5;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.duo-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+/* Loading Box */
+.duo-loading {
+  background-color: #ffffff;
+  padding: 32px;
+  text-align: center;
+  border-radius: 20px;
+  border: 2px solid #e5e7eb;
+  color: #1b4332;
+  font-weight: 900;
+}
+
+/* Mobile Screen Breakpoint */
+@media (max-width: 620px) {
+  .duo-product-layout {
+    flex-direction: column;
+  }
+
+  .duo-image-card {
+    width: 100%;
+    height: 240px;
+  }
+}

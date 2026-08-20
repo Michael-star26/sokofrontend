@@ -1,0 +1,27 @@
+.app-layout {
+  min-height: 100vh;
+  background-color: #f0f4f1; /* Soft Sage Background */
+  display: flex;
+  flex-direction: column;
+}
+
+.app-content {
+  flex: 1;
+  padding: 32px 24px;
+}
+
+.content-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.app-footer {
+  text-align: center;
+  background: #ffffff;
+  border-top: 3px solid #e2e8f0;
+  color: #64748b;
+  font-weight: 700;
+  padding: 20px;
+  font-size: 0.9rem;
+}

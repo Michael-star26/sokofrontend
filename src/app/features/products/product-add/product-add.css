@@ -1,0 +1,114 @@
+.duo-form-container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 12px 0 32px 0;
+}
+
+.duo-header-bar {
+  margin-bottom: 20px;
+}
+
+.duo-page-title {
+  font-size: 22px;
+  font-weight: 900;
+  margin: 0;
+  color: #111827;
+}
+
+.duo-page-subtitle {
+  margin: 4px 0 0 0;
+  color: #6b7280;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Card Container */
+.duo-form-card {
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 20px;
+}
+
+/* Grid Layout */
+.duo-form-row {
+  display: flex;
+  gap: 16px;
+}
+
+.half-width {
+  flex: 1;
+}
+
+.full-width-number {
+  width: 100%;
+}
+
+/* Inset Panel for Image Preview */
+.duo-image-preview {
+  margin-bottom: 24px;
+  padding: 16px;
+  background-color: #f9fafb;
+  border: 2px dashed #d1d5db;
+  border-radius: 14px;
+  text-align: center;
+}
+
+.duo-preview-label {
+  font-size: 11px;
+  color: #6b7280;
+  margin-bottom: 8px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.preview-image {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 2px solid #e5e7eb;
+}
+
+/* Form Actions Row */
+.duo-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 2px solid #f3f4f6;
+}
+
+/* Ant Design Form Control Overrides */
+::ng-deep .ant-form-item-label > label {
+  font-weight: 900 !important;
+  color: #111827 !important;
+  font-size: 11px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.03em;
+}
+
+::ng-deep .ant-input,
+::ng-deep .ant-select-selector,
+::ng-deep .ant-input-number {
+  border-radius: 12px !important;
+  border: 2px solid #e5e7eb !important;
+  background-color: #f9fafb !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+}
+
+::ng-deep .ant-input:focus,
+::ng-deep .ant-select-focused .ant-select-selector,
+::ng-deep .ant-input-number-focused {
+  border-color: #1b4332 !important;
+  box-shadow: none !important;
+  background-color: #ffffff !important;
+}
+
+@media (max-width: 580px) {
+  .duo-form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+}

@@ -1,0 +1,100 @@
+<div class="duo-form-container">
+
+  <!-- Header Bar -->
+  <div class="duo-header-bar">
+    <h1 class="duo-page-title">Add Harvest Item</h1>
+    <p class="duo-page-subtitle">Fill in the details below to expand your market catalog.</p>
+  </div>
+
+  <!-- Form Card -->
+  <div class="uo-card duo-form-card">
+    <form nz-form [nzLayout]="'vertical'" [formGroup]="productForm" (ngSubmit)="submitForm()">
+
+      <!-- Product Name -->
+      <nz-form-item>
+        <nz-form-label nzRequired nzFor="name">Product Name</nz-form-label>
+        <nz-form-control nzErrorTip="Please enter the product name">
+          <input nz-input formControlName="name" id="name" placeholder="e.g., Organic Honeycrisp Apples" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <div class="duo-form-row">
+        <!-- Category -->
+        <nz-form-item class="half-width">
+          <nz-form-label nzRequired nzFor="category">Category</nz-form-label>
+          <nz-form-control nzErrorTip="Please select a category">
+            <nz-select id="category" formControlName="category" nzPlaceHolder="Select category">
+              <nz-option nzValue="Vegetables" nzLabel="Vegetables"></nz-option>
+              <nz-option nzValue="Fruits" nzLabel="Fruits"></nz-option>
+              <nz-option nzValue="Dairy" nzLabel="Dairy & Eggs"></nz-option>
+              <nz-option nzValue="Bakery" nzLabel="Bakery"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+
+        <!-- Cost -->
+        <nz-form-item class="half-width">
+          <nz-form-label nzRequired nzFor="cost">Cost (KSh)</nz-form-label>
+          <nz-form-control nzErrorTip="Please enter a valid cost (min 0)">
+            <nz-input-number
+              id="cost"
+              formControlName="cost"
+              [nzMin]="0"
+              [nzStep]="10"
+              nzPlaceHolder="150"
+              class="full-width-number">
+            </nz-input-number>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <!-- Image URL -->
+      <nz-form-item>
+        <nz-form-label nzFor="image_url">Image URL</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="image_url" id="image_url" placeholder="https://images.unsplash.com/..." />
+        </nz-form-control>
+      </nz-form-item>
+
+      <!-- Inset Image Preview -->
+      @if (imageUrl()) {
+        <div class="duo-image-preview">
+          <p class="duo-preview-label">Image Preview</p>
+          <img [src]="imageUrl()" alt="Product preview" class="preview-image" />
+        </div>
+      }
+
+      <!-- Description -->
+      <nz-form-item>
+        <nz-form-label nzFor="description">Description</nz-form-label>
+        <nz-form-control>
+          <textarea
+            nz-input
+            formControlName="description"
+            id="description"
+            rows="3"
+            placeholder="Describe the freshness, origin, or dietary details...">
+          </textarea>
+        </nz-form-control>
+      </nz-form-item>
+
+      <!-- Action Buttons -->
+      <div class="duo-form-actions">
+        <button
+          type="button"
+          class="uo-button-secondary"
+          (click)="onCancel()"
+          [disabled]="isSubmitting()">
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="uo-button-primary"
+          [disabled]="isSubmitting()">
+          Save Product
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

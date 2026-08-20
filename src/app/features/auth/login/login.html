@@ -1,0 +1,45 @@
+<div class="duo-auth-container">
+  <div class="uo-card duo-auth-card">
+
+    <div class="duo-auth-header">
+      <h2 class="duo-auth-title">Login to Account</h2>
+      <p class="duo-auth-subtitle">Welcome back! Enter your details to continue.</p>
+    </div>
+
+    <form nz-form [formGroup]="loginForm" (ngSubmit)="onSubmit()" nzLayout="vertical">
+
+      <nz-form-item>
+        <nz-form-label nzRequired>Email</nz-form-label>
+        <nz-form-control nzErrorTip="Please input a valid email!">
+          <nz-input-group nzPrefixIcon="mail">
+            <input nz-input formControlName="email" placeholder="email@example.com" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzRequired>Password</nz-form-label>
+        <nz-form-control nzErrorTip="Password is required!">
+          <nz-input-group nzPrefixIcon="lock">
+            <input nz-input type="password" formControlName="password" placeholder="Password" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <button type="submit" class="uo-button-primary duo-submit-btn" [disabled]="isLoading">
+        @if (isLoading) {
+          <nz-spin nzSimple></nz-spin>
+        } @else {
+          Log in
+        }
+      </button>
+
+    </form>
+
+    <div class="duo-auth-footer">
+      <span>Don't have an account?</span>
+      <a routerLink="/auth/register" class="duo-link">Register now</a>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,83 @@
+/* Page Centering Wrapper */
+.duo-auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 16px;
+  min-height: calc(100vh - 120px);
+}
+
+/* Card Geometry */
+.duo-auth-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 32px 28px;
+  box-sizing: border-box;
+}
+
+/* Header Text */
+.duo-auth-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.duo-auth-title {
+  font-size: 24px;
+  font-weight: 900;
+  color: #111827;
+  margin: 0 0 6px 0;
+}
+
+.duo-auth-subtitle {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Input Styles Overrides */
+::ng-deep .ant-input-affix-wrapper {
+  border-radius: 12px !important;
+  padding: 8px 12px !important;
+  border: 2px solid #e5e7eb !important;
+  background-color: #f9fafb !important;
+}
+
+::ng-deep .ant-input-affix-wrapper-focused {
+  border-color: #1b4332 !important;
+  box-shadow: none !important;
+  background-color: #ffffff !important;
+}
+
+::ng-deep .ant-form-item-label > label {
+  font-weight: 900 !important;
+  color: #111827 !important;
+  font-size: 12px !important;
+  text-transform: uppercase !important;
+}
+
+.duo-submit-btn {
+  margin-top: 12px;
+  height: 46px;
+  font-size: 14px !important;
+}
+
+/* Footer Link */
+.duo-auth-footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 13px;
+  color: #6b7280;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.duo-link {
+  color: #1b4332;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.duo-link:hover {
+  text-decoration: underline;
+}

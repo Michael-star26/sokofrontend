@@ -1,0 +1,45 @@
+<div class="users-container">
+  <div class="header-bar">
+    <h2>User Role Management</h2>
+    <p>Grant or revoke administrator privileges for system accounts.</p>
+  </div>
+
+  <nz-table #usersTable [nzData]="users()" [nzLoading]="isLoading()" class="users-table">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Role</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (user of usersTable.data; track user.id) {
+        <tr>
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.phone }}</td>
+          <td>
+            @if (user.is_admin) {
+              <nz-tag nzColor="blue">Admin</nz-tag>
+            } @else {
+              <nz-tag nzColor="default">User</nz-tag>
+            }
+          </td>
+          <td>
+            <button
+              nz-button
+              [nzType]="user.is_admin ? 'default' : 'primary'"
+              nzDanger
+              nz-popconfirm
+              [nzPopconfirmTitle]="'Are you sure you want to change administrative access for ' + user.username + '?'"
+              (nzOnConfirm)="toggleRole(user)">
+              {{ user.is_admin ? 'Revoke Admin' : 'Make Admin' }}
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </nz-table>
+</div>
