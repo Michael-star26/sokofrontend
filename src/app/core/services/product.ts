@@ -8,7 +8,7 @@ import { Product } from '../models/product';
 })
 export class ProductService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://127.0.0.1:5000/products';
+  private apiUrl = 'https://sokogreen.onrender.com/api/products';
 
   // Get all products
   getProducts(): Observable<Product[]> {

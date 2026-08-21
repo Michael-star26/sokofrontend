@@ -38,7 +38,7 @@ export interface PaymentAudit {
 @Injectable({ providedIn: 'root' })
 export class AdminService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:5000/api/admin';
+  private apiUrl = 'https://sokogreen.onrender.com/api/admin';
 
   private getAuthHeaders() {
     const token = typeof window !== 'undefined' ? localStorage.getItem('auth_token') : '';

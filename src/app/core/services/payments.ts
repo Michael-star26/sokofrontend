@@ -23,7 +23,7 @@ export interface PaymentStatusResponse {
 })
 export class PaymentService {
   // Corrected to match Flask url_prefix='/api/payment'
-  private readonly baseUrl = 'http://127.0.0.1:5000/api/payments';
+  private readonly baseUrl = 'https://sokogreen.onrender.com/api/payments';
 
   constructor(private http: HttpClient) {}
 
