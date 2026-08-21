@@ -42,7 +42,7 @@ export class ProductDetail {
   private paymentService = inject(PaymentService);
   private message = inject(NzMessageService);
   private destroyRef = inject(DestroyRef);
-  
+
   isAdmin = toSignal(this.authService.isAdmin$, { initialValue: false });
   product = toSignal(
     this.route.paramMap.pipe(
@@ -84,7 +84,8 @@ export class ProductDetail {
     this.isProcessing.set(true);
     this.statusText.set('Triggering STK push prompt on your phone...');
 
-    this.paymentService.initiateStkPush(phone, amount, name).subscribe({
+    // Pass undefined for items so name occupies the 4th parameter position
+    this.paymentService.initiateStkPush(phone, amount, undefined, name).subscribe({
       next: (res) => {
         if (res.success && res.checkoutRequestId) {
           this.statusText.set('Prompt sent! Please enter your M-Pesa PIN...');

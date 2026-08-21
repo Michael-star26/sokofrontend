@@ -90,6 +90,29 @@
   color: #374151;
 }
 
+/* Cart Badge Custom Styling */
+.cart-badge-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 10px;
+  transition: background-color 0.15s ease;
+}
+
+.cart-badge-btn:hover {
+  background-color: #f3f4f6;
+}
+
+::ng-deep .ant-badge-count {
+  background-color: #1b4332 !important;
+  box-shadow: 0 0 0 2px #ffffff !important;
+  font-weight: 800 !important;
+}
+
 /* Mobile Toggle */
 .mobile-toggle-btn {
   display: none;
@@ -127,13 +150,18 @@
 .mobile-link {
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: space-between;
   padding: 12px;
   border-radius: 12px;
   font-weight: 800;
   font-size: 15px;
   color: #374151;
   text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.mobile-link:hover {
+  background-color: #f9fafb;
 }
 
 .mobile-link.active-link {
@@ -165,18 +193,6 @@
   justify-content: center;
 }
 
-/* Breakpoint rules */
-@media (max-width: 768px) {
-  .desktop-menu,
-  .desktop-actions {
-    display: none;
-  }
-
-  .mobile-toggle-btn {
-    display: block;
-  }
-}
-
 /* Search Input Styling */
 .desktop-search {
   flex: 1;
@@ -203,7 +219,7 @@
   background-color: #ffffff !important;
 }
 
-/* Mobile Responsiveness Overrides */
+/* Breakpoint & Responsive Overrides */
 @media (max-width: 840px) {
   .desktop-search,
   .desktop-menu,
@@ -215,6 +231,23 @@
     display: block !important;
   }
 }
+
 main, .main-content {
-  padding-top: 16px; /* Provides breathing space below sticky header */
+  padding-top: 16px;
+}
+
+.navbar-header {
+  background: #ffffff;
+  border-bottom: 2px solid #e5e7eb;
+  position: fixed; /* Fixed relative to viewport to prevent scrolling */
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* Offset page content to account for the 64px fixed header height */
+main, .main-content {
+  padding-top: 80px; /* 64px header height + 16px extra breathing room */
 }

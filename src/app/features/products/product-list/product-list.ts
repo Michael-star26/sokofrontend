@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { ProductService } from '../../../core/services/product';
 import { Product } from '../../../core/models/product';
 import { Auth } from '../../../core/services/auth';
+import { Cart } from '../../../core/services/cart'; // Import Cart Service
 
 // NG-ZORRO Modules
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -15,6 +16,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzTooltipModule } from 'ng-zorro-antd/tooltip';
+import { NzMessageService } from 'ng-zorro-antd/message'; // Notification toast
 
 @Component({
   selector: 'app-product-list',
@@ -37,12 +39,13 @@ import { NzTooltipModule } from 'ng-zorro-antd/tooltip';
 export class ProductList implements OnInit {
   private productService = inject(ProductService);
   private authService = inject(Auth);
+  private cartService = inject(Cart); // Inject Cart Service
+  private message = inject(NzMessageService);
   private router = inject(Router);
 
   products$!: Observable<Product[]>;
   isAdmin$ = this.authService.isAdmin$;
 
-  // Interactive Signals
   searchQuery = signal<string>('');
   selectedCategory = signal<string>('ALL');
 
@@ -64,11 +67,26 @@ export class ProductList implements OnInit {
     this.selectedCategory.set(cat);
   }
 
-  // Updated method signature to allow optional/undefined values safely
   viewProductDetail(id: string | number | undefined): void {
     if (id !== undefined) {
       this.router.navigate(['/products', id]);
     }
+  }
+
+  onAddToCart(event: Event, product: Product): void {
+    event.stopPropagation(); // Prevents navigating to detail view when clicking button
+
+    if (!product.id) return;
+
+    this.cartService.addToCart({
+      product_id: Number(product.id),
+      quantity: 1,
+      name: product.name,
+      unit_cost: product.cost,
+      image_url: product.image_url
+    });
+
+    this.message.success(`Added ${product.name} to cart!`);
   }
 
   filterProducts(products: Product[]): Product[] {

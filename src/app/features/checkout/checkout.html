@@ -54,7 +54,9 @@
         <div class="success-details">
           <div class="check-icon">✓</div>
           <h3>Payment Complete</h3>
-          <p>M-Pesa Receipt: <strong>{{ mpesaReceipt }}</strong></p>
+          @if (mpesaReceipt) {
+            <p>M-Pesa Receipt: <strong>{{ mpesaReceipt }}</strong></p>
+          }
         </div>
       }
     </div>

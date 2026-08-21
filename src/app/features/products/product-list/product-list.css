@@ -521,3 +521,58 @@
     min-height: 0 !important;
   }
 }
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border-color);
+  margin-top: auto;
+}
+
+.action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-duo-cart {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2e7d32;
+  color: #ffffff;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.btn-duo-cart:hover {
+  background-color: #1b5e20;
+  transform: translateY(-1px);
+}
+
+.btn-duo-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  background-color: #1b4332;
+  color: #ffffff;
+  padding: 0 14px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+.btn-duo-action:hover {
+  background-color: #2d6a4f;
+  color: #ffffff;
+}

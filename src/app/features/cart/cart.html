@@ -1,0 +1,102 @@
+<div class="cart-container max-w-5xl mx-auto p-4 md:p-8">
+  <h1 class="text-2xl font-bold mb-6">Shopping Cart</h1>
+
+  <nz-spin [nzSpinning]="isLoading()">
+    @if (cartItems().length > 0) {
+      <div class="overflow-x-auto bg-white rounded-lg shadow-sm border border-gray-100">
+        <nz-table #basicTable [nzData]="cartItems()" [nzShowPagination]="false">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Unit Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of basicTable.data; track item.product_id) {
+              <tr>
+                <td class="flex items-center gap-3 py-4">
+                  <img
+                    [src]="item.image_url || 'assets/placeholder.png'"
+                    [alt]="item.name"
+                    class="w-12 h-12 object-cover rounded border"
+                  />
+                  <div>
+                    <span class="font-medium text-gray-800 block">{{ item.name || 'Product #' + item.product_id }}</span>
+                    @if (item.available_stock !== undefined && item.quantity > item.available_stock) {
+                      <span class="text-xs text-amber-600">Max available stock: {{ item.available_stock }}</span>
+                    }
+                  </div>
+                </td>
+                <td>KES {{ (item.unit_cost || 0) | number:'1.2-2' }}</td>
+                <td>
+                  <nz-input-number
+                    [ngModel]="item.quantity"
+                    [nzMin]="1"
+                    [nzMax]="item.available_stock || 99"
+                    [nzStep]="1"
+                    (ngModelChange)="updateQuantity(item.product_id, $event)">
+                  </nz-input-number>
+                </td>
+                <td class="font-semibold text-emerald-700">
+                  KES {{ ((item.unit_cost || 0) * item.quantity) | number:'1.2-2' }}
+                </td>
+                <td>
+                  <button
+                    nz-button
+                    nzType="text"
+                    nzDanger
+                    nz-popconfirm
+                    nzPopconfirmTitle="Remove this item from your cart?"
+                    (nzOnConfirm)="removeItem(item.product_id)">
+                    <span nz-icon nzType="delete"></span>
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </nz-table>
+      </div>
+
+      <div class="mt-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-gray-50 p-6 rounded-lg border border-gray-200">
+        <button
+          nz-button
+          nzType="default"
+          nzDanger
+          nz-popconfirm
+          nzPopconfirmTitle="Are you sure you want to clear your cart?"
+          (nzOnConfirm)="clearCart()">
+          Clear Cart
+        </button>
+
+        <div class="flex flex-col md:flex-row items-end md:items-center gap-6 w-full md:w-auto">
+          <div class="text-right">
+            <span class="text-gray-500 text-sm block">Subtotal</span>
+            <span class="text-2xl font-extrabold text-emerald-800">
+              KES {{ subtotal() | number:'1.2-2' }}
+            </span>
+          </div>
+
+          <button
+            nz-button
+            nzType="primary"
+            nzSize="large"
+            class="w-full md:w-auto bg-emerald-700 border-emerald-700 hover:bg-emerald-800"
+            (click)="proceedToCheckout()">
+            Proceed to Checkout
+          </button>
+        </div>
+      </div>
+    } @else {
+      <div class="text-center py-16 bg-white rounded-lg border border-dashed border-gray-300">
+        <span nz-icon nzType="shopping-cart" class="text-5xl text-gray-300 mb-4"></span>
+        <p class="text-gray-500 text-lg mb-4">Your shopping cart is empty.</p>
+        <a nz-button nzType="primary" routerLink="/products" class="bg-emerald-700 border-emerald-700">
+          Browse Products
+        </a>
+      </div>
+    }
+  </nz-spin>
+</div>

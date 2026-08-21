@@ -25,8 +25,18 @@
       }
     </div>
 
-    <!-- Actions -->
-    <div class="desktop-actions nav-actions">
+    <!-- Actions & Cart Badge -->
+    <div class="desktop-actions nav-actions flex items-center gap-4">
+
+      <!-- Cart Icon with Badge -->
+      <a routerLink="/cart" class="nav-link relative flex items-center">
+        <nz-badge [nzCount]="cartCount()" [nzOverflowCount]="99" [nzShowZero]="false">
+          <button nz-button nzType="text" class="flex items-center justify-center p-1">
+            <span nz-icon nzType="shopping-cart" class="text-xl"></span>
+          </button>
+        </nz-badge>
+      </a>
+
       @if (auth.isAuthenticated()) {
         <div class="user-status">
           <span class="role-badge" [class.admin]="auth.isAdmin()" [class.user]="!auth.isAdmin()">
@@ -58,12 +68,32 @@
     nzTitle="Menu"
     (nzOnClose)="isMobileMenuOpen = false">
     <ng-container *nzDrawerContent>
-      <div class="mobile-drawer-content">
-        <div class="mobile-nav-links">
-          <a routerLink="/products" class="mobile-link" (click)="isMobileMenuOpen = false">
+      <div class="mobile-drawer-content flex flex-col gap-4">
+        <div class="mobile-nav-links flex flex-col gap-3">
+          <a routerLink="/products" class="mobile-link flex items-center gap-2 text-base" (click)="isMobileMenuOpen = false">
             <span nz-icon nzType="appstore"></span>
             <span>Products</span>
           </a>
+
+          <!-- Mobile Cart Link -->
+          <a routerLink="/cart" class="mobile-link flex items-center justify-between text-base" (click)="isMobileMenuOpen = false">
+            <div class="flex items-center gap-2">
+              <span nz-icon nzType="shopping-cart"></span>
+              <span>Cart</span>
+            </div>
+            <nz-badge [nzCount]="cartCount()" [nzOverflowCount]="99"></nz-badge>
+          </a>
+
+          @if (auth.isAdmin()) {
+            <a routerLink="/products/add" class="mobile-link flex items-center gap-2 text-base" (click)="isMobileMenuOpen = false">
+              <span nz-icon nzType="plus-circle"></span>
+              <span>Add Product</span>
+            </a>
+            <a routerLink="/admin/users" class="mobile-link flex items-center gap-2 text-base" (click)="isMobileMenuOpen = false">
+              <span nz-icon nzType="team"></span>
+              <span>Manage Users</span>
+            </a>
+          }
         </div>
       </div>
     </ng-container>
