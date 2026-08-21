@@ -1,59 +1,66 @@
-# Sokocommerce
+# 🌿 SokoGreen
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.5.
+> **Farm-Fresh Organic Grocery Platform**
+> *Direct B2B & B2C supply chain connecting local organic agriculture with enterprise & retail markets.*
 
-## Development server
+---
 
-To start a local development server, run:
+##  Summary
 
-```bash
-ng serve
-```
+**SokoGreen** is an end-to-end e-commerce solution engineered for high-availability organic grocery delivery. Built on a modular micro-architecture (**Flask REST API** + **Angular 17+**), the platform guarantees seamless order processing, automated inventory tracking, and localized mobile payment integrations.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+##  Live Environments
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+* **Production API:** `[https://sokogreen.onrender.com](https://sokogreen.onrender.com)`
+* **Web Portal:** `[https://sokofrontend.vercel.app](https://sokofrontend.vercel.app)`
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+##  Technology Stack
 
-```bash
-ng generate --help
-```
+| Layer | Technology | Infrastructure / Purpose |
+| --- | --- | --- |
+| **Frontend** | Angular 17+ | Vercel Global Edge Network |
+| **Backend** | Python 3.11 / Flask 3.x | Render Cloud Service |
+| **Database** | PostgreSQL | Managed Relational DB |
+| **Auth** | Flask-JWT-Extended | Role-Based Access Control (RBAC) |
+| **Payments** | Safaricom Daraja API | Automated M-Pesa STK Push |
 
-## Building
+---
 
-To build the project run:
+##  System Features
 
-```bash
-ng build
-```
+* **Real-Time Catalog Management:** Automated stock sync across 6 core product categories.
+* **Enterprise Security:** JWT-based user authentication supporting `USER`, `ADMIN`, and `SUPER_ADMIN` tiers.
+* **Instant Checkout:** Integrated mobile payment gateway with real-time callback processing.
+* **Cross-Origin Compliance:** Secure CORS configuration supporting multi-region client origins.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+##  Quick Deployment & Run
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+### Backend API
 
 ```bash
-ng e2e
+# 1. Install Dependencies
+pip install -r requirements.txt
+
+# 2. Seed Initial Database & Master Accounts
+python seed.py
+
+# 3. Launch Application Server
+gunicorn app:app
+
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## 🔒 Master Test Accounts
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+| Access Tier | Account Email | Password |
+| --- | --- | --- |
+| **Super Admin** | `superadmin@sokocommerce.com` | `SuperAdmin123!` |
+| **Manager / Admin** | `admin@sokocommerce.com` | `AdminPass123!` |
+| **Client / User** | `johndoe@example.com` | `UserPass123!` |
