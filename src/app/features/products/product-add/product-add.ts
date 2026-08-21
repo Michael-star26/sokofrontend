@@ -40,6 +40,7 @@ export class ProductAdd {
     name: ['', [Validators.required]],
     category: ['', [Validators.required]],
     cost: [null, [Validators.required, Validators.min(0)]],
+    stock: [20, [Validators.required, Validators.min(0)]], // Added stock field (defaults to 20)
     image_url: [''],
     description: ['']
   });

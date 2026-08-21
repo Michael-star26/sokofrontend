@@ -50,6 +50,23 @@
         </nz-form-item>
       </div>
 
+      <!-- Stock Quantity Row -->
+      <div class="duo-form-row">
+        <nz-form-item class="half-width">
+          <nz-form-label nzRequired nzFor="stock">Initial Stock Quantity</nz-form-label>
+          <nz-form-control nzErrorTip="Please enter a valid stock count (min 0)">
+            <nz-input-number
+              id="stock"
+              formControlName="stock"
+              [nzMin]="0"
+              [nzStep]="1"
+              nzPlaceHolder="20"
+              class="full-width-number">
+            </nz-input-number>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
       <!-- Image URL -->
       <nz-form-item>
         <nz-form-label nzFor="image_url">Image URL</nz-form-label>

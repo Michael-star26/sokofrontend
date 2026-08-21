@@ -95,17 +95,37 @@ export class InventoryList implements OnInit {
 
   updateStock(item: InventoryItem, newStock: string): void {
     const parsedStock = parseInt(newStock, 10);
+
     if (isNaN(parsedStock) || parsedStock < 0) {
       this.message.warning('Please enter a valid non-negative integer.');
       return;
     }
 
+    // Prevent unnecessary API calls if value hasn't changed
+    if (item.stock === parsedStock) {
+      return;
+    }
+
+    // Store original value in case rollback is needed
+    const originalStock = item.stock;
+
+    // Optimistic UI update for immediate feedback
+    item.stock = parsedStock;
+    item.is_low_stock = parsedStock < 10;
+
     this.adminService.updateStock(item.id, parsedStock).subscribe({
       next: (res) => {
         this.message.success(res.message || 'Stock level saved successfully.');
-        this.loadInventory();
+        // Update with server response payload if available
+        if (res.product) {
+          item.stock = res.product.stock;
+          item.is_low_stock = res.product.is_low_stock;
+        }
       },
       error: (err) => {
+        // Rollback UI to original state on failure
+        item.stock = originalStock;
+        item.is_low_stock = originalStock < 10;
         this.message.error(err.error?.message || 'Failed to update stock.');
       }
     });
