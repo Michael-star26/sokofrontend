@@ -7,7 +7,7 @@
       <span class="logo-text">Admin Portal</span>
     </div>
 
-    <!-- State Switcher (No routerLink / page reloads) -->
+    <!-- State Switcher -->
     <ul nz-menu nzMode="inline" class="duo-admin-menu">
       <li
         nz-menu-item
@@ -15,6 +15,20 @@
         (click)="selectTab('users')">
         <span nz-icon nzType="team"></span>
         <span>User Roles</span>
+      </li>
+      <li
+        nz-menu-item
+        [nzSelected]="activeTab() === 'orders'"
+        (click)="selectTab('orders')">
+        <span nz-icon nzType="shopping-cart"></span>
+        <span>Orders & Payments</span>
+      </li>
+      <li
+        nz-menu-item
+        [nzSelected]="activeTab() === 'inventory'"
+        (click)="selectTab('inventory')">
+        <span nz-icon nzType="database"></span>
+        <span>Inventory Control</span>
       </li>
       <li
         nz-menu-item
@@ -47,6 +61,8 @@
         <h2>
           @switch (activeTab()) {
             @case ('users') { User Role Management }
+            @case ('orders') { Orders & M-Pesa Payment Audit }
+            @case ('inventory') { Stock & Inventory Operations }
             @case ('add-product') { Create Harvest Item }
             @case ('catalog') { Product Catalog }
           }
@@ -61,10 +77,15 @@
 
     <nz-content class="duo-admin-content">
       <div class="duo-inner-content">
-        <!-- Render feature inline without routes -->
         @switch (activeTab()) {
           @case ('users') {
             <app-users></app-users>
+          }
+          @case ('orders') {
+            <app-order-list></app-order-list>
+          }
+          @case ('inventory') {
+            <app-inventory-list></app-inventory-list>
           }
           @case ('add-product') {
             <app-product-add></app-product-add>

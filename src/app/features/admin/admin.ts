@@ -3,17 +3,19 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Auth } from '../../core/services/auth';
 
-// Feature Components (Paths matched to your layout)
+// Feature Components
 import { Users } from './users/users';
 import { ProductAdd } from '../products/product-add/product-add';
 import { ProductList } from '../products/product-list/product-list';
+import { OrderList } from './orders/order-list/order-list';
+import { InventoryList } from './inventory/inventory-list/inventory-list';
 
 // NG-ZORRO Modules
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
-export type AdminTab = 'users' | 'add-product' | 'catalog';
+export type AdminTab = 'users' | 'add-product' | 'catalog' | 'orders' | 'inventory';
 
 @Component({
   selector: 'app-admin',
@@ -25,7 +27,9 @@ export type AdminTab = 'users' | 'add-product' | 'catalog';
     NzIconModule,
     Users,
     ProductAdd,
-    ProductList
+    ProductList,
+    OrderList,
+    InventoryList
   ],
   templateUrl: './admin.html',
   styleUrl: './admin.css'
@@ -34,7 +38,6 @@ export class Admin {
   private authService = inject(Auth);
   private router = inject(Router);
 
-  // Active view state signal
   activeTab = signal<AdminTab>('users');
   isAdmin = this.authService.checkAdminState();
 
