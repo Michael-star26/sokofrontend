@@ -24,3 +24,17 @@
   overflow: hidden;
   border: 1px solid #f0f0f0;
 }
+
+/* Action button alignment */
+.action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.text-muted {
+  color: #8c8c8c;
+  font-style: italic;
+  font-size: 13px;
+}

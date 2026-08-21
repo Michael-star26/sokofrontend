@@ -48,7 +48,7 @@
         </p>
 
         <div class="duo-actions">
-          <button type="button" class="uo-button-primary">
+          <button type="button" class="uo-button-primary" (click)="openCheckoutModal()">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
               <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
             </svg>
@@ -72,6 +72,75 @@
       </div>
 
     </div>
+
+    <!-- M-Pesa Guest Express Checkout Modal -->
+    <nz-modal
+      [nzVisible]="isCheckoutVisible()"
+      nzTitle="M-Pesa Express Checkout"
+      [nzFooter]="null"
+      (nzOnCancel)="closeCheckoutModal()">
+      <ng-container *nzModalContent>
+        <div style="display: flex; flex-direction: column; gap: 16px; padding-top: 8px;">
+
+          <div style="display: flex; justify-content: space-between; padding: 12px; background: #f0fdf4; border-radius: 12px; border: 1.5px solid #bbf7d0;">
+            <span>Item Payload:</span>
+            <strong>KSh {{ prod.cost }}</strong>
+          </div>
+
+          <!-- Guest Name Input -->
+          <div>
+            <label style="font-weight: 700; color: #374151; display: block; margin-bottom: 6px;">Full Name</label>
+            <input
+              nz-input
+              type="text"
+              placeholder="e.g. Alex Otieno"
+              [ngModel]="guestName()"
+              (ngModelChange)="guestName.set($event)"
+              [disabled]="isProcessing()" />
+          </div>
+
+          <!-- M-Pesa Phone Number Input -->
+          <div>
+            <label style="font-weight: 700; color: #374151; display: block; margin-bottom: 6px;">M-Pesa Phone Number</label>
+            <nz-input-group nzPrefix="🇰🇪">
+              <input
+                nz-input
+                type="text"
+                placeholder="07XXXXXXXX or 2547XXXXXXXX"
+                [ngModel]="phoneNumber()"
+                (ngModelChange)="phoneNumber.set($event)"
+                [disabled]="isProcessing()" />
+            </nz-input-group>
+          </div>
+
+          @if (isProcessing()) {
+            <div style="display: flex; align-items: center; gap: 10px; padding: 10px; background: #eff6ff; border-radius: 8px; color: #1d4ed8; font-weight: 600;">
+              <nz-spin nzSimple></nz-spin>
+              <span>{{ statusText() }}</span>
+            </div>
+          }
+
+          <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 8px;">
+            <button
+              type="button"
+              class="uo-button-secondary"
+              (click)="closeCheckoutModal()"
+              [disabled]="isProcessing()">
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="uo-button-primary"
+              (click)="processCheckout(prod.cost)"
+              [disabled]="isProcessing()">
+              Pay KSh {{ prod.cost }}
+            </button>
+          </div>
+
+        </div>
+      </ng-container>
+    </nz-modal>
+
   } @else {
     <div class="duo-loading">
       <nz-spin nzSimple></nz-spin>

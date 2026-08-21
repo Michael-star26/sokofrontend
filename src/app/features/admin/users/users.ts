@@ -2,7 +2,6 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Auth, UserItem } from '../../../core/services/auth';
 
-// NG-ZORRO Modules
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -23,7 +22,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
   styleUrl: './users.css'
 })
 export class Users implements OnInit {
-  private authService = inject(Auth);
+  public authService = inject(Auth); // PUBLIC so users.html can access authService.isSuperAdmin()
   private message = inject(NzMessageService);
 
   users = signal<UserItem[]>([]);
@@ -52,11 +51,34 @@ export class Users implements OnInit {
       next: (res) => {
         this.message.success(res.message);
         this.users.update(current =>
-          current.map(u => u.id === user.id ? { ...u, is_admin: res.is_admin } : u)
+          current.map(u => u.id === user.id ? {
+            ...u,
+            is_admin: res.is_admin,
+            role: (res.role || (res.is_admin ? 'ADMIN' : 'USER')) as 'USER' | 'ADMIN' | 'SUPER_ADMIN'
+          } as UserItem : u)
         );
       },
       error: (err) => {
         const errorMsg = err.error?.message || 'Failed to update user role.';
+        this.message.error(errorMsg);
+      }
+    });
+  }
+
+  promoteToSuperAdmin(user: UserItem): void {
+    this.authService.promoteSuperAdmin(user.id).subscribe({
+      next: (res) => {
+        this.message.success(res.message);
+        this.users.update(current =>
+          current.map(u => u.id === user.id ? {
+            ...u,
+            is_admin: true,
+            role: 'SUPER_ADMIN' as const
+          } as UserItem : u)
+        );
+      },
+      error: (err) => {
+        const errorMsg = err.error?.message || 'Failed to promote user to Super Admin.';
         this.message.error(errorMsg);
       }
     });

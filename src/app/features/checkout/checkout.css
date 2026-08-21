@@ -1,0 +1,143 @@
+.checkout-card {
+  max-width: 440px;
+  margin: 40px auto;
+  padding: 28px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+  color: #111827;
+}
+
+.summary-section {
+  background-color: #f9fafb;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: #4b5563;
+}
+
+.summary-row:last-child {
+  margin-bottom: 0;
+}
+
+.amount-tag {
+  color: #16a34a;
+  font-size: 1.1rem;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-section label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.form-section input {
+  padding: 12px 14px;
+  font-size: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-section input:focus {
+  border-color: #16a34a;
+}
+
+.btn-pay {
+  margin-top: 12px;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #16a34a;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-pay:hover:not(:disabled) {
+  background-color: #15803d;
+}
+
+.btn-pay:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.status-box {
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.status-box.pending {
+  background-color: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e40af;
+}
+
+.status-box.completed {
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+}
+
+.status-box.failed {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+}
+
+.status-msg {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.success-details {
+  margin-top: 12px;
+}
+
+.check-icon {
+  font-size: 2rem;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid #bfdbfe;
+  border-top: 3px solid #1e40af;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 12px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

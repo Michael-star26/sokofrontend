@@ -1,7 +1,7 @@
 <div class="users-container">
   <div class="header-bar">
     <h2>User Role Management</h2>
-    <p>Grant or revoke administrator privileges for system accounts.</p>
+    <p>Grant or revoke administrator and super administrator privileges for system accounts.</p>
   </div>
 
   <nz-table #usersTable [nzData]="users()" [nzLoading]="isLoading()" class="users-table">
@@ -21,22 +21,43 @@
           <td>{{ user.email }}</td>
           <td>{{ user.phone }}</td>
           <td>
-            @if (user.is_admin) {
+            @if (user.role === 'SUPER_ADMIN') {
+              <nz-tag nzColor="purple">Super Admin</nz-tag>
+            } @else if (user.is_admin || user.role === 'ADMIN') {
               <nz-tag nzColor="blue">Admin</nz-tag>
             } @else {
               <nz-tag nzColor="default">User</nz-tag>
             }
           </td>
           <td>
-            <button
-              nz-button
-              [nzType]="user.is_admin ? 'default' : 'primary'"
-              nzDanger
-              nz-popconfirm
-              [nzPopconfirmTitle]="'Are you sure you want to change administrative access for ' + user.username + '?'"
-              (nzOnConfirm)="toggleRole(user)">
-              {{ user.is_admin ? 'Revoke Admin' : 'Make Admin' }}
-            </button>
+            <div class="action-buttons">
+              <!-- Prevent altering Super Admins directly -->
+              @if (user.role !== 'SUPER_ADMIN') {
+                <button
+                  nz-button
+                  [nzType]="user.is_admin ? 'default' : 'primary'"
+                  nzDanger
+                  nz-popconfirm
+                  [nzPopconfirmTitle]="'Are you sure you want to change administrative access for ' + user.username + '?'"
+                  (nzOnConfirm)="toggleRole(user)">
+                  {{ user.is_admin ? 'Revoke Admin' : 'Make Admin' }}
+                </button>
+
+                <!-- Check reactive Super Admin status directly from authService -->
+                @if (authService.isSuperAdmin()) {
+                  <button
+                    nz-button
+                    nzType="dashed"
+                    nz-popconfirm
+                    [nzPopconfirmTitle]="'Promote ' + user.username + ' to Super Admin? This gives root permissions.'"
+                    (nzOnConfirm)="promoteToSuperAdmin(user)">
+                    Make Super Admin
+                  </button>
+                }
+              } @else {
+                <span class="text-muted">Protected System Account</span>
+              }
+            </div>
           </td>
         </tr>
       }

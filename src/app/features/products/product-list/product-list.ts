@@ -51,7 +51,9 @@ export class ProductList implements OnInit {
     { label: 'Vegetables', value: 'VEGETABLES' },
     { label: 'Fruits', value: 'FRUITS' },
     { label: 'Dairy & Eggs', value: 'DAIRY' },
-    { label: 'Bakery', value: 'BAKERY' }
+    { label: 'Bakery', value: 'BAKERY' },
+    { label: 'Pantry', value: 'PANTRY' },
+    { label: 'Beverages', value: 'BEVERAGES' }
   ];
 
   ngOnInit(): void {

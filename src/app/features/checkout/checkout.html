@@ -1,0 +1,62 @@
+<div class="checkout-card">
+  <h2>Order Checkout</h2>
+
+  <div class="summary-section">
+    <div class="summary-row">
+      <span>Payment Method</span>
+      <strong>M-Pesa Express (STK Push)</strong>
+    </div>
+    <div class="summary-row">
+      <span>Total Amount</span>
+      <strong class="amount-tag">KES {{ amount }}</strong>
+    </div>
+  </div>
+
+  @if (paymentState !== 'COMPLETED') {
+    <div class="form-section">
+      <label for="phone">M-Pesa Phone Number</label>
+      <input
+        type="tel"
+        id="phone"
+        [(ngModel)]="phone"
+        placeholder="07XXXXXXXX or 2547XXXXXXXX"
+        [disabled]="isProcessing"
+      />
+
+      <button
+        class="btn-pay"
+        (click)="payWithMpesa()"
+        [disabled]="isProcessing || !phone">
+        @if (!isProcessing) {
+          <span>Pay KES {{ amount }}</span>
+        } @else {
+          <span>Waiting for PIN entry...</span>
+        }
+      </button>
+    </div>
+  }
+
+  <!-- Status Notification Area -->
+  @if (paymentState !== 'IDLE') {
+    <div
+      class="status-box"
+      [class.pending]="paymentState === 'PENDING'"
+      [class.completed]="paymentState === 'COMPLETED'"
+      [class.failed]="paymentState === 'FAILED'"
+    >
+      @if (paymentState === 'PENDING') {
+        <div class="spinner"></div>
+      }
+
+      <p class="status-msg">{{ statusMessage }}</p>
+
+      @if (paymentState === 'COMPLETED') {
+        <div class="success-details">
+          <div class="check-icon">✓</div>
+          <h3>Payment Complete</h3>
+          <p>M-Pesa Receipt: <strong>{{ mpesaReceipt }}</strong></p>
+        </div>
+      }
+    </div>
+  }
+</div>

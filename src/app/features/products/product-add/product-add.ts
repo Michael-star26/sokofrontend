@@ -34,7 +34,6 @@ export class ProductAdd {
   private router = inject(Router);
   private message = inject(NzMessageService);
 
-  // Modern UI state management via Signal
   isSubmitting = signal(false);
 
   productForm: FormGroup = this.fb.group({
@@ -45,7 +44,6 @@ export class ProductAdd {
     description: ['']
   });
 
-  // Signal stream driving the image preview in the template
   imageUrl = toSignal(
     this.productForm.get('image_url')!.valueChanges,
     { initialValue: '' }
@@ -67,8 +65,8 @@ export class ProductAdd {
     this.productService.addProduct(this.productForm.value).subscribe({
       next: () => {
         this.message.success('Product created successfully!');
-        this.productForm.reset();
         this.isSubmitting.set(false);
+        this.router.navigate(['/products']);
       },
       error: () => {
         this.message.error('Failed to create product.');
@@ -78,6 +76,6 @@ export class ProductAdd {
   }
 
   onCancel(): void {
-    this.productForm.reset();
+    this.router.navigate(['/products']);
   }
 }
