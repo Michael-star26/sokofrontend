@@ -38,7 +38,7 @@ export interface PaymentAudit {
 @Injectable({ providedIn: 'root' })
 export class AdminService {
   private http = inject(HttpClient);
-  private apiUrl = 'michaellee.pythonanywhere.com/api/admin';
+  private apiUrl = 'https://michaellee.pythonanywhere.com/api/admin';
 
   private getAuthHeaders() {
     const token = typeof window !== 'undefined' ? localStorage.getItem('auth_token') : '';

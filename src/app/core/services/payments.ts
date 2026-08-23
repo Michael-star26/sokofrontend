@@ -23,7 +23,7 @@ export interface PaymentStatusResponse {
 })
 export class PaymentService {
   // Corrected to match Flask url_prefix='/api/payment'
-  private readonly baseUrl = 'michaellee.pythonanywhere.com/api/payments';
+  private readonly baseUrl = 'https://michaellee.pythonanywhere.com/api/payments';
 
   constructor(private http: HttpClient) {}
 

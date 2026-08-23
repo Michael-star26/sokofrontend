@@ -8,7 +8,7 @@ import { Product } from '../models/product';
 })
 export class ProductService {
   private http = inject(HttpClient);
-  private apiUrl = 'michaellee.pythonanywhere.com/api/products';
+  private apiUrl = 'https://michaellee.pythonanywhere.com/api/products';
 
   // Get all products
   getProducts(): Observable<Product[]> {
