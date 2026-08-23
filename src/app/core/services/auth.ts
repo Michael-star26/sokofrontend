@@ -19,7 +19,7 @@ export class Auth {
   private http = inject(HttpClient);
   private platformId = inject(PLATFORM_ID);
 
-  private apiUrl = 'https://sokogreen.onrender.com/api/auth';
+  private apiUrl = 'michaellee.pythonanywhere.com/api/auth';
   private tokenKey = 'auth_token';
 
   // Signal-based state

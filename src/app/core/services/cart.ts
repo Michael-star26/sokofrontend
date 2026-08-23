@@ -37,7 +37,7 @@ export class Cart {
   private http = inject(HttpClient);
   private platformId = inject(PLATFORM_ID);
 
-  private readonly baseUrl = 'https://sokogreen.onrender.com/api/cart';
+  private readonly baseUrl = 'michaellee.pythonanywhere.com/api/cart';
   private readonly storageKey = 'cart_items';
 
   // Reactive Signals for global state
