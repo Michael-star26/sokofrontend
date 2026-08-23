@@ -9,6 +9,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 @Component({
   selector: 'app-register',
@@ -19,9 +20,12 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     NzFormModule,
     NzInputModule,
     NzButtonModule,
-    NzIconModule
+    NzIconModule,
+    NzSpinModule,
+    RouterLink
   ],
-  templateUrl: './register.html'
+  templateUrl: './register.html',
+  styleUrl:'./register.css'
 })
 export class Register {
   private fb = inject(FormBuilder);
